@@ -21,9 +21,14 @@ def create_app(test_config=None):
         pass
         
         
-    @app.route('/hello')
-    def hello():
+    #@app.route('/hello')
+    #def hello():
+    #    return 'Hello, World!'
+
+    @app.route('/index')
+    def index():
         return 'Hello, World!'
+
            
     from . import db
     db.init_app(app)
@@ -31,6 +36,10 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
     
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')
+
     
     return app
             
